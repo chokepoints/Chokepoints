@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chokepoints | Datasets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 200 120" role="img" aria-label="Chokepoints logo">
+          <g fill="none" stroke="#060a12" stroke-width="12" stroke-linecap="round">
+            <line x1="100" y1="60" x2="25" y2="25" />
+            <line x1="100" y1="60" x2="25" y2="95" />
+            <line x1="100" y1="60" x2="175" y2="25" />
+            <line x1="100" y1="60" x2="175" y2="95" />
+          </g>
+          <circle cx="100" cy="60" r="19" fill="#060a12" />
+          <circle cx="100" cy="60" r="10" fill="#ebebed" />
+          <circle cx="25" cy="25" r="14" fill="#060a12" />
+          <circle cx="25" cy="95" r="14" fill="#060a12" />
+          <circle cx="175" cy="25" r="14" fill="#060a12" />
+          <circle cx="175" cy="95" r="14" fill="#060a12" />
+        </svg>
+        <span>Chokepoints</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="analytical-tools.html">Analytical tools</a>
+        <a class="active" href="datasets.html">Datasets</a>
+        <a href="must-read.html">Must Read</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+    </header>
+
+    <main class="method-main">
+      <section class="method-panel">
+        <h1>Datasets</h1>
+
+        <p>
+          Chokepoints relies on a small set of authoritative, policy grade data sources to ensure transparency, comparability, and reproducibility. The datasets below are used to compute EXVI metrics and to contextualize vulnerabilities through value added trade and maritime connectivity indicators. Each source is documented with scope, key variables, and typical use cases across the platform.
+        </p>
+
+        <h2>CEPII BACI</h2>
+        <p><strong>Description</strong><br />BACI is an international trade database produced by CEPII, built from UN Comtrade and harmonized to improve cross country consistency by reconciling mirror flows and reporting asymmetries.</p>
+        <p><strong>Primary use in Chokepoints</strong><br />Used as the main source for bilateral product level trade flows when computing EXVI components that require stable partner shares and long time series comparability.</p>
+        <p><strong>Typical granularity and coverage</strong><br />Global coverage, annual data, bilateral by reporter and partner at the product level.</p>
+        <p><strong>Key variables</strong><br />Reporter, Partner, Year, Trade value, Quantity, Unit, Product code and classification.</p>
+
+        <h2>UN Comtrade</h2>
+        <p><strong>Description</strong><br />UN Comtrade is the United Nations repository for official international merchandise trade statistics. It provides reporter level import and export flows by partner and product classification.</p>
+        <p><strong>Primary use in Chokepoints</strong><br />Used as a core source for product level bilateral trade flows that feed exposure and concentration diagnostics, and as a validation layer for derived indicators.</p>
+        <p><strong>Typical granularity and coverage</strong><br />Global coverage with yearly time series for most reporters, some reporters also provide higher frequency data depending on availability.</p>
+        <p><strong>Key variables</strong><br />Reporter, Partner, Year, Trade flow, Trade value, Quantity, Unit, Product code and classification.</p>
+
+        <h2>OECD TiVA</h2>
+        <p><strong>Description</strong><br />OECD Trade in Value Added (TiVA) data decomposes gross exports into domestic and foreign value added, enabling measurement of upstream dependencies that are not visible in standard trade flows.</p>
+        <p><strong>Primary use in Chokepoints</strong><br />Used to complement EXVI style product trade metrics with sector level value added dependence indicators, for example foreign value added content of exports and import content of production.</p>
+        <p><strong>Typical granularity and coverage</strong><br />Country by sector input output based estimates, released in waves with multi year coverage.</p>
+        <p><strong>Key variables and indicators</strong><br />Foreign value added in exports, domestic value added, value added by origin, sector level trade in value added measures.</p>
+
+        <h2>WTO TiVA</h2>
+        <p><strong>Description</strong><br />WTO TiVA provides trade in value added indicators designed to support analysis of global value chain participation, upstream and downstream linkages, and exposure to foreign inputs.</p>
+        <p><strong>Primary use in Chokepoints</strong><br />Used as an additional value added trade benchmark alongside OECD TiVA to support cross checks, alternative decompositions, and broader coverage depending on indicator availability.</p>
+        <p><strong>Typical granularity and coverage</strong><br />Country by sector, multi year series updated periodically.</p>
+        <p><strong>Key variables and indicators</strong><br />Participation measures, foreign value added content, domestic value added, forward and backward linkages, value added by source and destination.</p>
+
+        <h2>UNCTADstat</h2>
+        <p><strong>Description</strong><br />UNCTADstat is the United Nations Conference on Trade and Development statistical portal covering trade, maritime transport, concentration measures, and development relevant indicators.</p>
+        <p><strong>Primary use in Chokepoints</strong><br />Used for contextual indicators that strengthen interpretation of vulnerability signals, especially maritime connectivity, shipping related metrics, and high level trade structure indicators.</p>
+        <p><strong>Typical granularity and coverage</strong><br />Varies by series, typically country level annual indicators.</p>
+        <p><strong>Key variables and indicators used in the platform</strong><br />Maritime transport indicators, trade aggregates, and contextual series used for dashboards and background analysis.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

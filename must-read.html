@@ -1,0 +1,165 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chokepoints | Must Read</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 200 120" role="img" aria-label="Chokepoints logo">
+          <g fill="none" stroke="#060a12" stroke-width="12" stroke-linecap="round">
+            <line x1="100" y1="60" x2="25" y2="25" />
+            <line x1="100" y1="60" x2="25" y2="95" />
+            <line x1="100" y1="60" x2="175" y2="25" />
+            <line x1="100" y1="60" x2="175" y2="95" />
+          </g>
+          <circle cx="100" cy="60" r="19" fill="#060a12" />
+          <circle cx="100" cy="60" r="10" fill="#ebebed" />
+          <circle cx="25" cy="25" r="14" fill="#060a12" />
+          <circle cx="25" cy="95" r="14" fill="#060a12" />
+          <circle cx="175" cy="25" r="14" fill="#060a12" />
+          <circle cx="175" cy="95" r="14" fill="#060a12" />
+        </svg>
+        <span>Chokepoints</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="analytical-tools.html">Analytical tools</a>
+        <a href="datasets.html">Datasets</a>
+        <a class="active" href="must-read.html">Must Read</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+    </header>
+
+    <main class="must-main">
+      <section class="must-hero">
+        <p class="tools-eyebrow">CORE REFERENCES</p>
+        <h1>Must Read</h1>
+        <p class="tools-subtitle">Foundational references on commodity chains, global production networks, and geoeconomic power.</p>
+      </section>
+
+      <section id="must-grid" class="must-grid"></section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const references = [
+      {
+        citation: "Gary Gereffi, Miguel Korzeniewicz, 1994, Commodity Chains and Global Capitalism",
+        query: "Commodity Chains and Global Capitalism Gereffi Korzeniewicz",
+        fallback: "Seminal edited volume that established commodity-chain analysis as a framework to study how global capitalism organizes production, labor, and value capture across countries."
+      },
+      {
+        citation: "Neil M. Coe, Peter Dicken, Martin Hess, 2008, Global Production Networks: realizing the potential",
+        query: "Global Production Networks realizing the potential Coe Dicken Hess",
+        fallback: "Influential article that refines the GPN approach by linking firm strategy, territorial dynamics, and network governance in global production systems."
+      },
+      {
+        citation: "Richard Baldwin, 2016, The Great Convergence: Information Technology and the New Globalization",
+        query: "The Great Convergence Richard Baldwin",
+        fallback: "Explains how digital communication enabled firms to offshore know-how, producing a new phase of globalization centered on fragmented production and rapid convergence."
+      },
+      {
+        citation: "Henry Farrell, Abraham L. Newman, 2023, The Uses and Abuses of Weaponized Interdependence",
+        query: "The Uses and Abuses of Weaponized Interdependence Farrell Newman",
+        fallback: "Examines how states strategically exploit dense global economic networks for coercion and control, while also assessing limits, blowback risks, and governance dilemmas."
+      },
+      {
+        citation: "Dale C. Copeland, 2015, Economic Interdependence and War",
+        query: "Economic Interdependence and War Dale C. Copeland",
+        fallback: "Major theoretical account of how expectations about future trade shape conflict incentives, linking interdependence to both peace and war risks."
+      },
+      {
+        citation: "Edward Fishman, 2022, Chokepoints: American Power in the Age of Economic Warfare",
+        query: "Chokepoints American Power in the Age of Economic Warfare Edward Fishman",
+        fallback: "Documents how control over financial and technological chokepoints became a central instrument of U.S. statecraft in contemporary geoeconomic competition."
+      }
+    ];
+
+    const grid = document.getElementById("must-grid");
+
+    function mkCard(ref, image, description) {
+      const card = document.createElement("article");
+      card.className = "must-card";
+
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = `Cover for ${ref.citation}`;
+      img.loading = "lazy";
+      img.className = "must-clickable";
+      img.setAttribute("role", "button");
+      img.setAttribute("tabindex", "0");
+
+      const body = document.createElement("div");
+      body.className = "must-card-body";
+
+      const title = document.createElement("h2");
+      title.textContent = ref.citation;
+      title.className = "must-clickable must-title";
+      title.setAttribute("role", "button");
+      title.setAttribute("tabindex", "0");
+
+      const desc = document.createElement("p");
+      desc.className = "must-desc";
+      desc.textContent = description;
+
+      const toggle = () => card.classList.toggle("expanded");
+      const keyToggle = (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggle();
+        }
+      };
+
+      img.addEventListener("click", toggle);
+      title.addEventListener("click", toggle);
+      img.addEventListener("keydown", keyToggle);
+      title.addEventListener("keydown", keyToggle);
+
+      body.appendChild(title);
+      body.appendChild(desc);
+      card.appendChild(img);
+      card.appendChild(body);
+      return card;
+    }
+
+    async function enrichReference(ref) {
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(ref.query)}&maxResults=1`;
+      try {
+        const r = await fetch(url);
+        const data = await r.json();
+        const item = data?.items?.[0];
+        const info = item?.volumeInfo || {};
+        return {
+          image: info.imageLinks?.thumbnail || "https://via.placeholder.com/180x260?text=No+Cover",
+          description: (info.description || ref.fallback).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim(),
+        };
+      } catch {
+        return {
+          image: "https://via.placeholder.com/180x260?text=No+Cover",
+          description: ref.fallback,
+        };
+      }
+    }
+
+    (async () => {
+      for (const ref of references) {
+        const meta = await enrichReference(ref);
+        grid.appendChild(mkCard(ref, meta.image, meta.description));
+      }
+    })();
+  </script>
+</body>
+</html>
+
+

@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chokepoints | Vulnerability Heatmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 200 120" role="img" aria-label="Chokepoints logo">
+          <g fill="none" stroke="#060a12" stroke-width="12" stroke-linecap="round">
+            <line x1="100" y1="60" x2="25" y2="25" />
+            <line x1="100" y1="60" x2="25" y2="95" />
+            <line x1="100" y1="60" x2="175" y2="25" />
+            <line x1="100" y1="60" x2="175" y2="95" />
+          </g>
+          <circle cx="100" cy="60" r="19" fill="#060a12" />
+          <circle cx="100" cy="60" r="10" fill="#ebebed" />
+          <circle cx="25" cy="25" r="14" fill="#060a12" />
+          <circle cx="25" cy="95" r="14" fill="#060a12" />
+          <circle cx="175" cy="25" r="14" fill="#060a12" />
+          <circle cx="175" cy="95" r="14" fill="#060a12" />
+        </svg>
+        <span>Chokepoints</span>
+      </a>
+
+      <nav class="nav-links">
+        <a class="active" href="analytical-tools.html">Analytical tools</a>
+        <a href="datasets.html">Datasets</a>
+        <a href="must-read.html">Must Read</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+    </header>
+
+    <main class="exvi-main">
+      <section class="exvi-panel">
+        <div class="construction-badge">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="6" y="44" width="52" height="12" rx="2" fill="#162f80" />
+            <rect x="10" y="28" width="44" height="14" rx="2" fill="#f4a100" stroke="#162f80" stroke-width="2" />
+            <path d="M12 39L22 29M24 39L34 29M36 39L46 29" stroke="#162f80" stroke-width="3" stroke-linecap="round" />
+            <rect x="14" y="20" width="6" height="8" fill="#162f80" />
+            <rect x="44" y="20" width="6" height="8" fill="#162f80" />
+          </svg>
+          <span>Under construction</span>
+        </div>
+
+        <p>
+          The GVC vulnerability heatmap displays an interactive map where countries are colored using the External Vulnerability Index (EXVI) for a selected year and sector, with filters for reporter country, year, and industry. One view maps the reporter’s external dependencies by shading partner countries according to their contribution to the reporter’s EXVI, linking supplier import shares to the concentration and exposure components that drive vulnerability, while tooltips and a side panel highlight the top suppliers and recent trends. A second view compares vulnerability across reporter countries for the same sector and year using the EXVI score normalized on a 0–100 scale, where higher values indicate greater exposure to external disruptions. The dashboard explains why each country is colored as it is through a transparent breakdown of the EXVI components, shows the index evolution over time, and includes simple shock scenarios such as removing or reducing a key supplier to visualize how the EXVI based vulnerability profile shifts.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

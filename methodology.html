@@ -1,0 +1,149 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chokepoints | Methodology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] },
+      svg: { fontCache: "global" },
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 200 120" role="img" aria-label="Chokepoints logo">
+          <g fill="none" stroke="#060a12" stroke-width="12" stroke-linecap="round">
+            <line x1="100" y1="60" x2="25" y2="25" />
+            <line x1="100" y1="60" x2="25" y2="95" />
+            <line x1="100" y1="60" x2="175" y2="25" />
+            <line x1="100" y1="60" x2="175" y2="95" />
+          </g>
+          <circle cx="100" cy="60" r="19" fill="#060a12" />
+          <circle cx="100" cy="60" r="10" fill="#ebebed" />
+          <circle cx="25" cy="25" r="14" fill="#060a12" />
+          <circle cx="25" cy="95" r="14" fill="#060a12" />
+          <circle cx="175" cy="25" r="14" fill="#060a12" />
+          <circle cx="175" cy="95" r="14" fill="#060a12" />
+        </svg>
+        <span>Chokepoints</span>
+      </a>
+
+      <nav class="nav-links">
+        <a class="active" href="analytical-tools.html">Analytical tools</a>
+        <a href="datasets.html">Datasets</a>
+        <a href="must-read.html">Must Read</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+    </header>
+
+    <main class="method-main">
+      <section class="method-panel">
+        <h1>EXVI Methodology</h1>
+
+        <p>
+          The External Vulnerability Index (EXVI) is a composite indicator developed by the European Commission to quantify external supply vulnerabilities at the product level and to support aggregation to sectors or value chain baskets. The EXVI is built from four underlying components that capture two broad dimensions of vulnerability: dependency risks (how exposed an economy is to external suppliers) and weak global market positioning (how limited domestic competitiveness is for the same product). The index is constructed so that higher values indicate higher external vulnerability.
+        </p>
+
+        <h2>1) Data and unit of analysis</h2>
+        <p>
+          The EXVI is computed for each reporter economy i, each product k, and each year t, using international trade data.
+        </p>
+        <ul>
+          <li>Imports: \( M_{i,k,t} \)</li>
+          <li>Exports: \( X_{i,k,t} \)</li>
+          <li>Bilateral imports by partner \(j\): \( M_{i\leftarrow j,k,t} \)</li>
+          <li>Import unit value: \( UV^M_{i,k,t} = \frac{M_{i,k,t}}{Q^M_{i,k,t}} \)</li>
+          <li>Export unit value: \( UV^X_{i,k,t} = \frac{X_{i,k,t}}{Q^X_{i,k,t}} \)</li>
+        </ul>
+        <p>The methodology is designed for product level trade statistics and can be aggregated later to higher level baskets.</p>
+
+        <h2>2) Component A, import supplier concentration (HHI)</h2>
+        <p>
+          This component captures whether imports of a product are sourced from a diversified set of suppliers or concentrated in a small number of partners.
+        </p>
+        <p class="method-formula">\[ s_{i\leftarrow j,k,t} = \frac{M_{i\leftarrow j,k,t}}{\sum_j M_{i\leftarrow j,k,t}} \]</p>
+        <p class="method-formula">\[ HHI_{i,k,t} = \sum_j \left(s_{i\leftarrow j,k,t}\right)^2 \]</p>
+        <p>Interpretation: higher HHI means more concentration, fewer alternative suppliers, and higher vulnerability.</p>
+
+        <h2>3) Component B, import dependence (trade ratio)</h2>
+        <p>This component measures reliance on imports relative to exports for the same product.</p>
+        <p class="method-formula">\[ TR_{i,k,t} = \frac{M_{i,k,t}}{X_{i,k,t}} \]</p>
+        <p>
+          Interpretation: higher TR indicates higher import dependence. In practice, safeguards are needed when exports are very small (for example applying winsorisation and normalization as described below).
+        </p>
+
+        <h2>4) Component C, revealed comparative disadvantage (RCD)</h2>
+        <p>This component captures weak export specialization relative to the world.</p>
+        <p class="method-formula">\[ RCA_{i,k,t} = \frac{\left(X_{i,k,t} / \sum_k X_{i,k,t}\right)}{\left(X_{w,k,t} / \sum_k X_{w,k,t}\right)} \]</p>
+        <p class="method-formula">\[ RCD_{i,k,t} = 1 - RCA_{i,k,t} \]</p>
+        <p>Interpretation: higher RCD indicates a weaker comparative position for the product in exports.</p>
+
+        <h2>5) Component D, price competitiveness (PCI)</h2>
+        <p>This component compares average export and import unit values.</p>
+        <p class="method-formula">\[ PCI_{i,k,t} = \frac{UV^X_{i,k,t}}{UV^M_{i,k,t}} \]</p>
+        <p>
+          Interpretation: a higher ratio can signal weaker price competitiveness, noting that unit values may also reflect differences in quality and product mix, which is why PCI is used jointly with RCD rather than alone.
+        </p>
+
+        <h2>6) Outlier handling and normalization</h2>
+        <p>
+          Because TR, RCD, and PCI can show extreme values and differ in scale across products, the methodology applies two standard steps before aggregation.
+        </p>
+        <p>
+          Step 1, winsorisation (to limit the influence of outliers): values above a chosen percentile threshold are capped at that threshold, and values below the symmetric lower threshold are floored accordingly. The Commission’s EXVI note describes winsorisation at the 90 percent level.
+        </p>
+        <p>
+          Step 2, min max normalization to a 0-1 range for each component Z in {HHI, TR, RCD, PCI} after winsorisation.
+        </p>
+        <p class="method-formula">\[ Z^{norm}_{i,k,t} = \frac{Z_{i,k,t} - Z_{min}}{Z_{max} - Z_{min}} \]</p>
+        <p>
+          where Z_min and Z_max are computed over the reference set used for the normalization (for example across products and economies in the sample for a given year).
+        </p>
+
+        <h2>7) Build two pillars using geometric means</h2>
+        <p>The EXVI combines the four normalized components into two pillars, each computed as a geometric mean with equal weights.</p>
+        <p class="method-formula">\[ P1_{i,k,t} = \sqrt{HHI^{norm}_{i,k,t} \cdot TR^{norm}_{i,k,t}} \]</p>
+        <p class="method-formula">\[ P2_{i,k,t} = \sqrt{RCD^{norm}_{i,k,t} \cdot PCI^{norm}_{i,k,t}} \]</p>
+        <p>
+          The geometric mean is used to reflect that vulnerability is high when both underlying dimensions are high, and it penalizes cases where one dimension is low and the other is high.
+        </p>
+
+        <h2>8) Compute the final EXVI score (product level)</h2>
+        <p class="method-formula">\[ EXVI_{i,k,t} = \sqrt{P1_{i,k,t} \cdot P2_{i,k,t}} \]</p>
+        <p>
+          The resulting score is bounded between 0 and 1 after normalization, where values closer to 1 indicate higher external vulnerability for that product in that economy and year.
+        </p>
+
+        <h2>9) Aggregation to sectors or value chain baskets</h2>
+        <p>
+          To obtain a sector or basket score for an economy and year, compute an aggregate over the set of products K belonging to that basket. A simple and transparent option is an unweighted average.
+        </p>
+        <p class="method-formula">\[ EXVI^{basket}_{i,t} = \frac{1}{|K|}\sum_{k\in K} EXVI_{i,k,t} \]</p>
+        <p>
+          If desired, aggregation can also be value weighted (for example weighting by import value shares within the basket) to reflect economic materiality, as long as the weighting scheme is stated explicitly.
+        </p>
+
+        <h2>10) How to interpret EXVI</h2>
+        <p>
+          EXVI is a relative vulnerability indicator. Higher scores reflect a combination of concentrated sourcing, high import dependence, and weaker competitive positioning for the same product. A high EXVI product is more exposed to external shocks such as supplier disruptions, trade restrictions, or geopolitical coercion, because alternatives are limited and the domestic economy is less able to offset the shock through competitive production or diversified sourcing.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

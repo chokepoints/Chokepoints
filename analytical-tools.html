@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chokepoints | Analytical tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 200 120" role="img" aria-label="Chokepoints logo">
+          <g fill="none" stroke="#060a12" stroke-width="12" stroke-linecap="round">
+            <line x1="100" y1="60" x2="25" y2="25" />
+            <line x1="100" y1="60" x2="25" y2="95" />
+            <line x1="100" y1="60" x2="175" y2="25" />
+            <line x1="100" y1="60" x2="175" y2="95" />
+          </g>
+          <circle cx="100" cy="60" r="19" fill="#060a12" />
+          <circle cx="100" cy="60" r="10" fill="#ebebed" />
+          <circle cx="25" cy="25" r="14" fill="#060a12" />
+          <circle cx="25" cy="95" r="14" fill="#060a12" />
+          <circle cx="175" cy="25" r="14" fill="#060a12" />
+          <circle cx="175" cy="95" r="14" fill="#060a12" />
+        </svg>
+        <span>Chokepoints</span>
+      </a>
+
+      <nav class="nav-links">
+        <a class="active" href="analytical-tools.html">Analytical tools</a>
+        <a href="datasets.html">Datasets</a>
+        <a href="must-read.html">Must Read</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+    </header>
+
+    <main class="tools-main">
+      <section class="tools-hero">
+        <p class="tools-eyebrow">RESEARCH PLATFORM</p>
+        <h1>Analytical tools</h1>
+        <p class="tools-subtitle">
+          Select one module to explore vulnerability diagnostics, data assets and methods.
+        </p>
+      </section>
+
+      <section class="tools-grid">
+        <a href="exvi.html" class="tool-card tool-card-primary">
+          <h2>EXVI Index</h2>
+          <p>Track exposure and concentration across strategic trade dependencies.</p>
+          <span>Open module ↗</span>
+        </a>
+
+        <a href="heatmap.html" class="tool-card">
+          <h2>GVC vulnerability Heatmap</h2>
+          <p>Compare country-product risk profiles through high-density matrix views.</p>
+          <span>Open module ↗</span>
+        </a>
+
+        <a href="methodology.html" class="tool-card tool-card-dark">
+          <h2>Methodology</h2>
+          <p>Review formulas, assumptions and reproducibility notes behind each indicator.</p>
+          <span>Open module ↗</span>
+        </a>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
